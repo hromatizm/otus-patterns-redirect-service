@@ -59,7 +59,7 @@ class RulePackTest {
         private val uri = URI("/api/v1/rule-pack/create")
 
         private val rulePackToSave = RulePackDto(
-            url = INITIAL_URL,
+            uri = INITIAL_URL,
             pack = pack
         )
 
@@ -70,7 +70,7 @@ class RulePackTest {
             ).thenReturn(
                 RulePackEntity(
                     id = PACK_ID,
-                    url = INITIAL_URL,
+                    uri = INITIAL_URL,
                     pack = pack
                 )
             )
@@ -157,7 +157,7 @@ class RulePackTest {
             ).thenReturn(
                 RulePackEntity(
                     id = PACK_ID,
-                    url = INITIAL_URL,
+                    uri = INITIAL_URL,
                     pack = pack
                 )
             )
@@ -178,14 +178,14 @@ class RulePackTest {
             ).thenReturn(
                 RulePackEntity(
                     id = PACK_ID,
-                    url = INITIAL_URL,
+                    uri = INITIAL_URL,
                     pack = pack
                 )
             )
             val request = prepareGetRequest(uri = uri, param = INITIAL_URL)
             val targetDto = RulePackDto(
                 id = PACK_ID,
-                url = INITIAL_URL,
+                uri = INITIAL_URL,
                 pack = pack
             )
 
@@ -239,7 +239,7 @@ class RulePackTest {
         private val uri = URI("/api/v1/rule-pack/update")
 
         private val rulePackToUpdate = RulePackDto(
-            url = INITIAL_URL,
+            uri = INITIAL_URL,
             pack = pack
         )
 
@@ -250,7 +250,7 @@ class RulePackTest {
             ).thenReturn(
                 RulePackEntity(
                     id = PACK_ID,
-                    url = INITIAL_URL,
+                    uri = INITIAL_URL,
                     pack = pack
                 )
             )
@@ -337,7 +337,7 @@ class RulePackTest {
             ).thenReturn(
                 RulePackEntity(
                     id = PACK_ID,
-                    url = INITIAL_URL,
+                    uri = INITIAL_URL,
                     pack = pack
                 )
             )

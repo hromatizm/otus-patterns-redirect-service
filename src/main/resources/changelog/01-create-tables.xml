@@ -14,7 +14,7 @@
             <column name="id" type="SERIAL">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="url" type="TEXT">
+            <column name="uri" type="TEXT">
                 <constraints nullable="false" unique="true"/>
             </column>
             <column name="pack" type="JSONB">

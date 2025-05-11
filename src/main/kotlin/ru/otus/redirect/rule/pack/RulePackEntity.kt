@@ -18,7 +18,7 @@ data class RulePackEntity(
     var id: Long? = null,
 
     @Column(nullable = false)
-    var url: String = "",
+    var uri: String = "",
 
     @Type(JsonBinaryType::class)
     @Column(name = "pack", columnDefinition = "jsonb", nullable = false)

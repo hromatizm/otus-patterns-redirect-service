@@ -14,16 +14,16 @@ class RulePackService(
 
     fun create(model: RulePackModel): RulePackModel {
         logger.info("Create rule pack. Started: $model")
-        if (rulePackRepo.existsByUrl(model.url)) throw RulePackAlreadyExistsException(url = model.url)
+        if (rulePackRepo.existsByUrl(model.uri)) throw RulePackAlreadyExistsException(url = model.uri)
         val savedModel = rulePackRepo.save(model)
         return savedModel.also {
             logger.info("Create rule pack. Finished: $it")
         }
     }
 
-    fun get(url: String): RulePackModel {
-        logger.info("Get rule pack. Started: $url")
-        val existingModel = findByUrlOrElseThrow(url)
+    fun get(uri: String): RulePackModel {
+        logger.info("Get rule pack. Started: $uri")
+        val existingModel = findByUrlOrElseThrow(uri)
         return existingModel.also {
             logger.info("Get rule pack. Finished: $it")
         }
@@ -31,7 +31,7 @@ class RulePackService(
 
     fun update(model: RulePackModel): RulePackModel {
         logger.info("Update rule pack. Started: $model")
-        val existingModel = findByUrlOrElseThrow(model.url)
+        val existingModel = findByUrlOrElseThrow(model.uri)
         val savedModel = rulePackRepo.save(
             existingModel.copy(pack = model.pack)
         )
@@ -40,9 +40,9 @@ class RulePackService(
         }
     }
 
-    fun delete(url: String) {
-        logger.info("Delete rule pack. Started: $url")
-        val existingModel = findByUrlOrElseThrow(url)
+    fun delete(uri: String) {
+        logger.info("Delete rule pack. Started: $uri")
+        val existingModel = findByUrlOrElseThrow(uri)
         rulePackRepo.deleteById(existingModel.id!!)
         logger.info("Delete rule pack. Finished. id: ${existingModel.id}")
     }
