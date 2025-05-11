@@ -1,12 +1,12 @@
 package ru.otus.redirect.rule.pack
 
-import org.springframework.data.jpa.repository.JpaRepository
-import org.springframework.stereotype.Repository
-
-@Repository
-interface IRulePackRepository : JpaRepository<RulePackEntity, Long> {
+interface IRulePackRepository {
 
     fun existsByUrl(url: String): Boolean
 
-    fun findByUrl(url: String): RulePackEntity?
+    fun findByUrl(url: String): RulePackModel?
+
+    fun save(model: RulePackModel): RulePackModel
+
+    fun deleteById(id: Long)
 }

@@ -1,14 +1,28 @@
 package ru.otus.redirect.rule.pack
 
-fun RulePackEntity.toDto() =
-    RulePackDto(
+fun RulePackEntity.toModel() =
+    RulePackModel(
         id = id,
         url = url,
         pack = pack
     )
 
-fun RulePackDto.toEntity() =
+fun RulePackModel.toEntity() =
     RulePackEntity(
+        id = id,
+        url = url,
+        pack = pack
+    )
+
+fun RulePackDto.toModel() =
+    RulePackModel(
+        id = id,
+        url = url,
+        pack = pack
+    )
+
+fun RulePackModel.toDto() =
+    RulePackDto(
         id = id,
         url = url,
         pack = pack

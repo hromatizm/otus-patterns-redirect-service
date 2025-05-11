@@ -12,41 +12,42 @@ class RulePackService(
 
     private val logger by lazyLogger()
 
-    fun create(dto: RulePackDto): RulePackDto {
-        logger.info("Create rule pack. Started: $dto")
-        if (rulePackRepo.existsByUrl(dto.url)) throw RulePackAlreadyExistsException(url = dto.url)
-        val savedEntity = rulePackRepo.save(dto.toEntity())
-        return savedEntity.toDto().also {
+    fun create(model: RulePackModel): RulePackModel {
+        logger.info("Create rule pack. Started: $model")
+        if (rulePackRepo.existsByUrl(model.url)) throw RulePackAlreadyExistsException(url = model.url)
+        val savedModel = rulePackRepo.save(model)
+        return savedModel.also {
             logger.info("Create rule pack. Finished: $it")
         }
     }
 
-    fun get(url: String): RulePackDto {
+    fun get(url: String): RulePackModel {
         logger.info("Get rule pack. Started: $url")
-        val existingEntity = findByUrlOrElseThrow(url)
-        return existingEntity.toDto().also {
+        val existingModel = findByUrlOrElseThrow(url)
+        return existingModel.also {
             logger.info("Get rule pack. Finished: $it")
         }
     }
 
-    fun update(dto: RulePackDto): RulePackDto {
-        logger.info("Update rule pack. Started: $dto")
-        val existingEntity = findByUrlOrElseThrow(dto.url)
-        existingEntity.pack = dto.pack
-        val savedEntity = rulePackRepo.save(existingEntity)
-        return savedEntity.toDto().also {
+    fun update(model: RulePackModel): RulePackModel {
+        logger.info("Update rule pack. Started: $model")
+        val existingModel = findByUrlOrElseThrow(model.url)
+        val savedModel = rulePackRepo.save(
+            existingModel.copy(pack = model.pack)
+        )
+        return savedModel.also {
             logger.info("Update rule pack. Finished: $it")
         }
     }
 
     fun delete(url: String) {
         logger.info("Delete rule pack. Started: $url")
-        val existingEntity = findByUrlOrElseThrow(url)
-        rulePackRepo.deleteById(existingEntity.id!!)
-        logger.info("Delete rule pack. Finished. id: ${existingEntity.id}")
+        val existingModel = findByUrlOrElseThrow(url)
+        rulePackRepo.deleteById(existingModel.id!!)
+        logger.info("Delete rule pack. Finished. id: ${existingModel.id}")
     }
 
-    private fun findByUrlOrElseThrow(url: String): RulePackEntity {
+    private fun findByUrlOrElseThrow(url: String): RulePackModel {
         return rulePackRepo.findByUrl(url)
             ?: throw RulePackNotExistsException(url = url)
     }

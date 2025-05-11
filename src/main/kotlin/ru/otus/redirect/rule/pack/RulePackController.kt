@@ -1,9 +1,13 @@
 package ru.otus.redirect.rule.pack
 
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import util.lazyLogger
 
@@ -18,26 +22,26 @@ class RulePackController(
     @PostMapping("/create")
     fun create(@RequestBody dto: RulePackDto): ResponseEntity<RulePackDto> {
         logger.info("Create rule-pack request received: $dto")
-        val createdDto = rulePackService.create(dto)
-        return ResponseEntity.ok().body(createdDto)
+        val createdModel = rulePackService.create(dto.toModel())
+        return ResponseEntity.ok().body(createdModel.toDto())
     }
 
-    @PostMapping("/get")
-    fun get(@RequestBody url: String): ResponseEntity<RulePackDto> {
+    @GetMapping("/get")
+    fun get(@RequestParam url: String): ResponseEntity<RulePackDto> {
         logger.info("Get rule-pack request received: $url")
-        val dto = rulePackService.get(url)
-        return ResponseEntity.ok().body(dto)
+        val model = rulePackService.get(url)
+        return ResponseEntity.ok().body(model.toDto())
     }
 
-    @PostMapping("/update")
+    @PutMapping("/update")
     fun update(@RequestBody dto: RulePackDto): ResponseEntity<RulePackDto> {
         logger.info("Update rule-pack request received: $dto")
-        val updatedDto = rulePackService.update(dto)
-        return ResponseEntity.ok().body(updatedDto)
+        val updatedModel = rulePackService.update(dto.toModel())
+        return ResponseEntity.ok().body(updatedModel.toDto())
     }
 
-    @PostMapping("/delete")
-    fun delete(@RequestBody url: String): ResponseEntity<Unit> {
+    @DeleteMapping("/delete")
+    fun delete(@RequestParam url: String): ResponseEntity<Unit> {
         logger.info("Delete rule-pack request received: $url")
         rulePackService.delete(url)
         return ResponseEntity.ok().build()
