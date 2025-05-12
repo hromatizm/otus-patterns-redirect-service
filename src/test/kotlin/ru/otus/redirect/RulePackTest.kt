@@ -23,7 +23,7 @@ import ru.otus.redirect.rule.pack.RulePackDto
 import ru.otus.redirect.rule.pack.RulePackEntity
 import java.net.URI
 
-private const val INITIAL_URL = "https://otus.ru"
+private const val INITIAL_URI = "/patterns-course"
 private const val PACK_ID = 1234567890L
 
 @SpringBootTest
@@ -59,7 +59,7 @@ class RulePackTest {
         private val uri = URI("/api/v1/rule-pack/create")
 
         private val rulePackToSave = RulePackDto(
-            uri = INITIAL_URL,
+            uri = INITIAL_URI,
             pack = pack
         )
 
@@ -70,7 +70,7 @@ class RulePackTest {
             ).thenReturn(
                 RulePackEntity(
                     id = PACK_ID,
-                    uri = INITIAL_URL,
+                    uri = INITIAL_URI,
                     pack = pack
                 )
             )
@@ -80,7 +80,7 @@ class RulePackTest {
         fun `the answer is OK`() {
             // Arrange
             whenever(
-                rulePackJpaRepository.existsByUrl(INITIAL_URL)
+                rulePackJpaRepository.existsByUri(INITIAL_URI)
             ).thenReturn(false)
             val request = preparePostRequest(uri = uri, body = rulePackToSave)
 
@@ -95,7 +95,7 @@ class RulePackTest {
         fun `body with pack`() {
             // Arrange
             whenever(
-                rulePackJpaRepository.existsByUrl(INITIAL_URL)
+                rulePackJpaRepository.existsByUri(INITIAL_URI)
             ).thenReturn(false)
             val targetDto = rulePackToSave.copy(id = PACK_ID)
             val request = preparePostRequest(uri = uri, body = rulePackToSave)
@@ -114,7 +114,7 @@ class RulePackTest {
         fun `rule-pack already exists, the answer is 409`() {
             // Arrange
             whenever(
-                rulePackJpaRepository.existsByUrl(INITIAL_URL)
+                rulePackJpaRepository.existsByUri(INITIAL_URI)
             ).thenReturn(true)
             val request = preparePostRequest(uri = uri, body = rulePackToSave)
 
@@ -129,7 +129,7 @@ class RulePackTest {
         fun `rule-pack already exists, the body with error`() {
             // Arrange
             whenever(
-                rulePackJpaRepository.existsByUrl(INITIAL_URL)
+                rulePackJpaRepository.existsByUri(INITIAL_URI)
             ).thenReturn(true)
             val request = preparePostRequest(uri = uri, body = rulePackToSave)
 
@@ -139,7 +139,7 @@ class RulePackTest {
                 .andReturn().response.contentAsString
 
             // Assert
-            assertThat(content).isEqualTo("Rule pack for url: $INITIAL_URL already exists")
+            assertThat(content).isEqualTo("Rule pack for uri: $INITIAL_URI already exists")
         }
 
     }
@@ -153,15 +153,15 @@ class RulePackTest {
         fun `the answer is OK`() {
             // Arrange
             whenever(
-                rulePackJpaRepository.findByUrl(INITIAL_URL)
+                rulePackJpaRepository.findByUri(INITIAL_URI)
             ).thenReturn(
                 RulePackEntity(
                     id = PACK_ID,
-                    uri = INITIAL_URL,
+                    uri = INITIAL_URI,
                     pack = pack
                 )
             )
-            val request = prepareGetRequest(uri = uri, param = INITIAL_URL)
+            val request = prepareGetRequest(uri = uri, param = INITIAL_URI)
 
             // Act
             val resultActions: ResultActions = mockMvc.perform(request)
@@ -174,18 +174,18 @@ class RulePackTest {
         fun `body with pack`() {
             // Arrange
             whenever(
-                rulePackJpaRepository.findByUrl(INITIAL_URL)
+                rulePackJpaRepository.findByUri(INITIAL_URI)
             ).thenReturn(
                 RulePackEntity(
                     id = PACK_ID,
-                    uri = INITIAL_URL,
+                    uri = INITIAL_URI,
                     pack = pack
                 )
             )
-            val request = prepareGetRequest(uri = uri, param = INITIAL_URL)
+            val request = prepareGetRequest(uri = uri, param = INITIAL_URI)
             val targetDto = RulePackDto(
                 id = PACK_ID,
-                uri = INITIAL_URL,
+                uri = INITIAL_URI,
                 pack = pack
             )
 
@@ -203,9 +203,9 @@ class RulePackTest {
         fun `rule-pack not exists, the answer is 404`() {
             // Arrange
             whenever(
-                rulePackJpaRepository.findByUrl(INITIAL_URL)
+                rulePackJpaRepository.findByUri(INITIAL_URI)
             ).thenReturn(null)
-            val request = prepareGetRequest(uri = uri, param = INITIAL_URL)
+            val request = prepareGetRequest(uri = uri, param = INITIAL_URI)
 
             // Act
             val resultActions: ResultActions = mockMvc.perform(request)
@@ -218,9 +218,9 @@ class RulePackTest {
         fun `rule-pack not exists, the body with error`() {
             // Arrange
             whenever(
-                rulePackJpaRepository.findByUrl(INITIAL_URL)
+                rulePackJpaRepository.findByUri(INITIAL_URI)
             ).thenReturn(null)
-            val request = prepareGetRequest(uri = uri, param = INITIAL_URL)
+            val request = prepareGetRequest(uri = uri, param = INITIAL_URI)
 
             // Act
             val content = mockMvc
@@ -228,7 +228,7 @@ class RulePackTest {
                 .andReturn().response.contentAsString
 
             // Assert
-            assertThat(content).isEqualTo("Rule pack for url: $INITIAL_URL not exists")
+            assertThat(content).isEqualTo("Rule pack for uri: $INITIAL_URI not exists")
         }
 
     }
@@ -239,7 +239,7 @@ class RulePackTest {
         private val uri = URI("/api/v1/rule-pack/update")
 
         private val rulePackToUpdate = RulePackDto(
-            uri = INITIAL_URL,
+            uri = INITIAL_URI,
             pack = pack
         )
 
@@ -250,7 +250,7 @@ class RulePackTest {
             ).thenReturn(
                 RulePackEntity(
                     id = PACK_ID,
-                    uri = INITIAL_URL,
+                    uri = INITIAL_URI,
                     pack = pack
                 )
             )
@@ -260,7 +260,7 @@ class RulePackTest {
         fun `the answer is OK`() {
             // Arrange
             whenever(
-                rulePackJpaRepository.findByUrl(INITIAL_URL)
+                rulePackJpaRepository.findByUri(INITIAL_URI)
             ).thenReturn(RulePackEntity(id = PACK_ID))
             val request = preparePutRequest(uri = uri, body = rulePackToUpdate)
 
@@ -275,7 +275,7 @@ class RulePackTest {
         fun `body with pack`() {
             // Arrange
             whenever(
-                rulePackJpaRepository.findByUrl(INITIAL_URL)
+                rulePackJpaRepository.findByUri(INITIAL_URI)
             ).thenReturn(RulePackEntity(id = PACK_ID))
             val targetDto = rulePackToUpdate.copy(id = PACK_ID)
             val request = preparePutRequest(uri = uri, body = rulePackToUpdate)
@@ -294,7 +294,7 @@ class RulePackTest {
         fun `rule-pack not exists, the answer is 404`() {
             // Arrange
             whenever(
-                rulePackJpaRepository.findByUrl(INITIAL_URL)
+                rulePackJpaRepository.findByUri(INITIAL_URI)
             ).thenReturn(null)
             val request = preparePutRequest(uri = uri, body = rulePackToUpdate)
 
@@ -309,7 +309,7 @@ class RulePackTest {
         fun `rule-pack already exists, the body with error`() {
             // Arrange
             whenever(
-                rulePackJpaRepository.findByUrl(INITIAL_URL)
+                rulePackJpaRepository.findByUri(INITIAL_URI)
             ).thenReturn(null)
             val request = preparePutRequest(uri = uri, body = rulePackToUpdate)
 
@@ -319,7 +319,7 @@ class RulePackTest {
                 .andReturn().response.contentAsString
 
             // Assert
-            assertThat(content).isEqualTo("Rule pack for url: $INITIAL_URL not exists")
+            assertThat(content).isEqualTo("Rule pack for uri: $INITIAL_URI not exists")
         }
 
     }
@@ -333,15 +333,15 @@ class RulePackTest {
         fun `the answer is OK`() {
             // Arrange
             whenever(
-                rulePackJpaRepository.findByUrl(INITIAL_URL)
+                rulePackJpaRepository.findByUri(INITIAL_URI)
             ).thenReturn(
                 RulePackEntity(
                     id = PACK_ID,
-                    uri = INITIAL_URL,
+                    uri = INITIAL_URI,
                     pack = pack
                 )
             )
-            val request = prepareDeleteRequest(uri = uri, param = INITIAL_URL)
+            val request = prepareDeleteRequest(uri = uri, param = INITIAL_URI)
 
             // Act
             val resultActions: ResultActions = mockMvc.perform(request)
@@ -354,9 +354,9 @@ class RulePackTest {
         fun `rule-pack not exists, the answer is 404`() {
             // Arrange
             whenever(
-                rulePackJpaRepository.findByUrl(INITIAL_URL)
+                rulePackJpaRepository.findByUri(INITIAL_URI)
             ).thenReturn(null)
-            val request = prepareDeleteRequest(uri = uri, param = INITIAL_URL)
+            val request = prepareDeleteRequest(uri = uri, param = INITIAL_URI)
 
             // Act
             val resultActions: ResultActions = mockMvc.perform(request)
@@ -369,9 +369,9 @@ class RulePackTest {
         fun `rule-pack not exists, the body with error`() {
             // Arrange
             whenever(
-                rulePackJpaRepository.findByUrl(INITIAL_URL)
+                rulePackJpaRepository.findByUri(INITIAL_URI)
             ).thenReturn(null)
-            val request = prepareDeleteRequest(uri = uri, param = INITIAL_URL)
+            val request = prepareDeleteRequest(uri = uri, param = INITIAL_URI)
 
             // Act
             val content = mockMvc
@@ -379,7 +379,7 @@ class RulePackTest {
                 .andReturn().response.contentAsString
 
             // Assert
-            assertThat(content).isEqualTo("Rule pack for url: $INITIAL_URL not exists")
+            assertThat(content).isEqualTo("Rule pack for uri: $INITIAL_URI not exists")
         }
 
     }

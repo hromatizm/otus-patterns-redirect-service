@@ -5,9 +5,9 @@ import org.springframework.stereotype.Repository
 
 interface IRulePackJpaRepository : JpaRepository<RulePackEntity, Long> {
 
-    fun existsByUrl(url: String): Boolean
+    fun existsByUri(uri: String): Boolean
 
-    fun findByUrl(url: String): RulePackEntity?
+    fun findByUri(uri: String): RulePackEntity?
 }
 
 @Repository
@@ -16,12 +16,12 @@ class RulePackRepository(
 ) : IRulePackRepository {
 
 
-    override fun existsByUrl(url: String): Boolean {
-        return jpaDelegate.existsByUrl(url)
+    override fun existsByUri(uri: String): Boolean {
+        return jpaDelegate.existsByUri(uri)
     }
 
-    override fun findByUrl(url: String): RulePackModel? {
-        val entity = jpaDelegate.findByUrl(url)
+    override fun findByUrl(uri: String): RulePackModel? {
+        val entity = jpaDelegate.findByUri(uri)
         return entity?.toModel()
     }
 

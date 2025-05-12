@@ -4,7 +4,7 @@ fun RulePackEntity.toModel() =
     RulePackModel(
         id = id,
         uri = uri,
-        pack = pack
+        pack = pack,
     )
 
 fun RulePackModel.toEntity() =

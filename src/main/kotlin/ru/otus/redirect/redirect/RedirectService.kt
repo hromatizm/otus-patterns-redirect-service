@@ -1,19 +1,19 @@
 package ru.otus.redirect.redirect
 
 import org.springframework.stereotype.Service
-import ru.otus.redirect.rule.pack.RulePackService
+import ru.otus.redirect.rule.chain.RuleChainService
 import util.lazyLogger
 
 @Service
 class RedirectService(
-    private val checkerService: RulePackService,
+    private val ruleChainService: RuleChainService,
 ) {
 
     private val logger by lazyLogger()
 
-    fun getLink(uri: String): String {
+    fun getLink(uri: String, args: Map<String, Any>): String {
         logger.info("Get Link. Started: $uri")
-        // val rulePack = rulePackService.get(uri)
-        return ""
+        val ruleChain = ruleChainService.getRuleChain(uri)
+        return ruleChain.executeChain(args)
     }
 }

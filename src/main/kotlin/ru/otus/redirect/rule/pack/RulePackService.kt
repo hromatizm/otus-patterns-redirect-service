@@ -14,7 +14,7 @@ class RulePackService(
 
     fun create(model: RulePackModel): RulePackModel {
         logger.info("Create rule pack. Started: $model")
-        if (rulePackRepo.existsByUrl(model.uri)) throw RulePackAlreadyExistsException(url = model.uri)
+        if (rulePackRepo.existsByUri(model.uri)) throw RulePackAlreadyExistsException(uri = model.uri)
         val savedModel = rulePackRepo.save(model)
         return savedModel.also {
             logger.info("Create rule pack. Finished: $it")
@@ -49,6 +49,6 @@ class RulePackService(
 
     private fun findByUrlOrElseThrow(url: String): RulePackModel {
         return rulePackRepo.findByUrl(url)
-            ?: throw RulePackNotExistsException(url = url)
+            ?: throw RulePackNotExistsException(uri = url)
     }
 }
