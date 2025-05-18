@@ -24,7 +24,6 @@ management:
       exposure:
         include: "health,info"
 
-logging:
-  level:
-    root: INFO
-    ru.otus.auth: INFO
+    root: DEBUG
+    ru.otus.redirect: DEBUG
+    org.springframework.security: DEBUG

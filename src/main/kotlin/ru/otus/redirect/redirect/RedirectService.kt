@@ -11,7 +11,7 @@ class RedirectService(
 
     private val logger by lazyLogger()
 
-    fun getLink(uri: String, args: Map<String, Any>): String {
+    fun getLink(uri: String, args: Map<String, Any>): String? {
         logger.info("Get Link. Started: $uri")
         val ruleChain = ruleChainService.getRuleChain(uri)
         return ruleChain.executeChain(args)

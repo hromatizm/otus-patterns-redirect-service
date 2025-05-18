@@ -6,16 +6,16 @@ class CheckerRegistry {
 
         private val checkers: MutableMap<String, Checker> = mutableMapOf(
             "lang" to LangChecker(),
-            "userId" to BeforeDateChecker()
+            "beforeDate" to BeforeDateChecker()
         )
 
         fun register(checker: Checker) {
             checkers[checker.code] = checker
         }
 
-        fun get(code: String): Checker? {
+        fun get(code: String, expectedValue: Any): Checker? {
             val checker = checkers[code]
-            return checker?.copy()
+            return checker?.getInstance(expectedValue)
         }
     }
 

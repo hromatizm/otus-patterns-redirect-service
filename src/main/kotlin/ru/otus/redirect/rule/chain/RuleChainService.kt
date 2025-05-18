@@ -23,10 +23,10 @@ class RuleChainService(
     }
 
     private fun interpret(rulePack: RulePackModel): RuleChainModel? {
-        val defaultUrl = rulePack.pack.firstNotNullOf { it.getValue("defaultUrl") }
+        val defaultUrl = rulePack.pack.firstNotNullOfOrNull { it.getOrDefault("defaultUrl", null) }
         val ruleChain = rulePack.pack.foldRight(initial = null as RuleChainModel?) { rule, next ->
             RuleChainModel(
-                checkers = rule.keys.mapNotNull { ruleCode -> CheckerRegistry.get(ruleCode) },
+                checkers = rule.mapNotNull {  CheckerRegistry.get(it.key, it.value) },
                 redirectUrl = rule.getValue("redirect"),
                 next = next,
                 defaultUrl = defaultUrl

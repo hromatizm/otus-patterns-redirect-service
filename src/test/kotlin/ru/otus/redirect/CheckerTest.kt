@@ -8,8 +8,8 @@ class CheckerTest {
 
     @Test
     fun `get lang checker`() {
-        val langChecker = CheckerRegistry.get("lang")
-        val langChecker1 = CheckerRegistry.get("lang")
+        val langChecker = CheckerRegistry.get("lang", "ru")
+        val langChecker1 = CheckerRegistry.get("lang", "en")
 
         assertThat(langChecker).isNotNull
     }

@@ -6,10 +6,10 @@ data class RuleChainModel(
     val checkers: List<Checker>,
     val redirectUrl: String,
     val next: RuleChainModel?,
-    val defaultUrl: String,
+    val defaultUrl: String?,
 ) {
 
-    fun executeChain(args: Map<String, Any>): String {
+    fun executeChain(args: Map<String, Any>): String? {
         return when {
             checkers.all { it.check(args) } -> redirectUrl
             next != null -> next.executeChain(args)

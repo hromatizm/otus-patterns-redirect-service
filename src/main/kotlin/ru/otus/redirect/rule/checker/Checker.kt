@@ -6,16 +6,16 @@ import kotlin.reflect.full.primaryConstructor
 abstract class Checker {
 
     abstract val code: String
+    abstract val expectedValue: Any?
 
     var next: Checker? = null
 
     abstract fun check(args: Map<String, Any>): Boolean
 
-    fun copy(): Checker {
+    fun getInstance(expectedValue: Any): Checker {
         val constructor = this::class.primaryConstructor
-            ?.takeIf { it.parameters.isEmpty() }
             ?: throw NoArgPrimaryConstructorException(className = this::class.simpleName)
-        return constructor.call()
+        return constructor.call(expectedValue)
     }
 
 }
