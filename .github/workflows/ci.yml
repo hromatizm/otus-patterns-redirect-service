@@ -31,7 +31,7 @@ jobs:
           ./gradlew publishToMavenLocal
 
       - name: Build and test
-        run: gradle build
+        run: ./gradlew build
 
       - name: Check Kover coverage
         run: ./gradlew koverVerify
