@@ -22,6 +22,14 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Clone checker-core
+        run: git clone https://github.com/hromatizm/otus-patterns-checker-core.git
+      
+      - name: Publish checker-core to Maven local
+        run: |
+          cd otus-patterns-checker-core
+          ./gradlew publishToMavenLocal
+
       - name: Build and test
         run: gradle build
 
