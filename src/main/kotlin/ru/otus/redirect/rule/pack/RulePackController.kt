@@ -27,9 +27,9 @@ class RulePackController(
     }
 
     @GetMapping("/get")
-    fun get(@RequestParam url: String): ResponseEntity<RulePackDto> {
-        logger.info("Get rule-pack request received: $url")
-        val model = rulePackService.get(url)
+    fun get(@RequestParam uri: String): ResponseEntity<RulePackDto> {
+        logger.info("Get rule-pack request received: $uri")
+        val model = rulePackService.get(uri)
         return ResponseEntity.ok().body(model.toDto())
     }
 
@@ -41,9 +41,9 @@ class RulePackController(
     }
 
     @DeleteMapping("/delete")
-    fun delete(@RequestParam url: String): ResponseEntity<Unit> {
-        logger.info("Delete rule-pack request received: $url")
-        rulePackService.delete(url)
+    fun delete(@RequestParam uri: String): ResponseEntity<Unit> {
+        logger.info("Delete rule-pack request received: $uri")
+        rulePackService.delete(uri)
         return ResponseEntity.ok().build()
     }
 }

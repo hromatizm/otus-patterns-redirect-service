@@ -394,7 +394,7 @@ class RulePackTest {
     private fun prepareGetRequest(uri: URI, param: String): MockHttpServletRequestBuilder {
         return get(uri)
             .contentType(MediaType.APPLICATION_JSON)
-            .param("url", param)
+            .param("uri", param)
     }
 
     private fun preparePutRequest(uri: URI, body: Any): MockHttpServletRequestBuilder {
@@ -407,6 +407,6 @@ class RulePackTest {
     private fun prepareDeleteRequest(uri: URI, param: String): MockHttpServletRequestBuilder {
         return delete(uri)
             .contentType(MediaType.APPLICATION_JSON)
-            .param("url", param)
+            .param("uri", param)
     }
 }
