@@ -8,6 +8,3 @@ class RulePackNotExistsException(uri: String) :
 
 class EmptyRulePackException(uri: String) :
     RuntimeException("Rule pack for uri: $uri is empty")
-
-class NoArgPrimaryConstructorException(className: String?) :
-    RuntimeException("Class $className must have a primary constructor without parameters")

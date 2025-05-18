@@ -1,5 +1,7 @@
 package ru.otus.redirect.rule.checker
 
+import ru.otus.checker.Checker
+
 class LangChecker(
     override val expectedValue: Any? = null,
 ) : Checker() {

@@ -1,6 +1,6 @@
 package ru.otus.redirect.rule.chain
 
-import ru.otus.redirect.rule.checker.Checker
+import ru.otus.checker.Checker
 
 data class RuleChainModel(
     val checkers: List<Checker>,

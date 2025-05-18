@@ -1,6 +1,7 @@
 package ru.otus.redirect.rule.checker
 
-import java.time.LocalDateTime
+import ru.otus.checker.Checker
+import java.time.LocalDate
 
 class BeforeDateChecker(
     override val expectedValue: Any? = null,
@@ -9,8 +10,8 @@ class BeforeDateChecker(
     override val code = "beforeDate"
 
     override fun check(args: Map<String, Any>): Boolean {
-        val actual = LocalDateTime.now()
-        val expected = LocalDateTime.parse(expectedValue as String)
+        val actual = LocalDate.now()
+        val expected = LocalDate.parse(expectedValue as String)
         return actual.isBefore(expected)
     }
 }

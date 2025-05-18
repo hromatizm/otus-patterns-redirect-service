@@ -1,5 +1,7 @@
 package ru.otus.redirect.rule.checker
 
+import ru.otus.checker.Checker
+
 class CheckerRegistry {
 
     companion object {

@@ -24,6 +24,8 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
+    implementation("ru.otus:checker-core:1.0.0")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.assertj:assertj-core:3.27.3")
     testImplementation("org.junit.jupiter:junit-jupiter-params:5.10.0")
@@ -34,6 +36,7 @@ dependencies {
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 java {
