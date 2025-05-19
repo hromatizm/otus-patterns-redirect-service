@@ -14,8 +14,8 @@ class ExceptionHandlerAdvice {
             .status(HttpStatus.CONFLICT)
             .body(exc.message)
 
-    @ExceptionHandler(RulePackNotExistsException::class)
-    fun handle(exc: RulePackNotExistsException) =
+    @ExceptionHandler(RulePackNotExistsException::class, ConditionNotFoundException::class)
+    fun handle(exc: Exception) =
         ResponseEntity
             .status(HttpStatus.NOT_FOUND)
             .body(exc.message)

@@ -1,14 +1,14 @@
-package ru.otus.redirect.rule.checker
+package ru.otus.redirect.rule.condition
 
-import ru.otus.checker.Checker
+import ru.otus.core.Condition
 
-class LangChecker(
+class LangCondition(
     override val expectedValue: Any? = null,
-) : Checker() {
+) : Condition() {
 
     override val code = "lang"
 
-    override fun check(args: Map<String, Any>): Boolean {
+    override fun execute(args: Map<String, Any>): Boolean {
         val actual = args["accept-language"] as String?
         val expected = expectedValue as String
         return actual == expected

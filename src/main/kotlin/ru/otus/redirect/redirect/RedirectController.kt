@@ -2,12 +2,13 @@ package ru.otus.redirect.redirect
 
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import ru.otus.core.ICommand
 import util.lazyLogger
 
 @RestController
 @RequestMapping("/api/v1")
 class RedirectController(
-    private val redirectService: RedirectService
+    private val getRedirectLinkCmd: GetRedirectLinkCmd
 ) {
 
     private val logger by lazyLogger()
@@ -18,7 +19,7 @@ class RedirectController(
         @RequestBody args: Map<String, String>
     ): ResponseEntity<String> {
         logger.info("Smart-link request received: $uri")
-        val redirectLink = redirectService.getLink(uri = uri, args = args)
+        val redirectLink = getRedirectLinkCmd.execute(args = args + ("uri" to uri))
         return ResponseEntity.ok().body(redirectLink)
     }
 

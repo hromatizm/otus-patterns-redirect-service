@@ -8,3 +8,6 @@ class RulePackNotExistsException(uri: String) :
 
 class EmptyRulePackException(uri: String) :
     RuntimeException("Rule pack for uri: $uri is empty")
+
+class ConditionNotFoundException(code: String) :
+    RuntimeException("Condition with code: $code not found")
