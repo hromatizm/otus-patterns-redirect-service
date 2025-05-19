@@ -2,7 +2,6 @@ package ru.otus.redirect.redirect
 
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import ru.otus.core.ICommand
 import util.lazyLogger
 
 @RestController
