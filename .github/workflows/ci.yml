@@ -30,7 +30,7 @@ jobs:
         working-directory: otus-patterns-checker-core
 
       - name: Build and test
-        run: ./gradlew build
+        run: gradle build
 
       - name: Check Kover coverage
         run: ./gradlew koverVerify
