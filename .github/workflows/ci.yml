@@ -28,9 +28,9 @@ jobs:
       - name: Clone checker-core
         run: git clone https://github.com/hromatizm/otus-patterns-checker-core.git
 
-      - name: Publish checker-core to Maven local
+      - name: Publish redirect-core to Maven local
         run: ./gradlew publishToMavenLocal
-        working-directory: otus-patterns-checker-core
+        working-directory: ./redirect-core
 
       - name: Build and test
         run: gradle build
