@@ -29,22 +29,11 @@ jobs:
         run: git clone https://github.com/hromatizm/otus-patterns-checker-core.git
 
       - name: Publish checker-core to Maven local
-        run: |
-          cd otus-patterns-checker-core
-          ./gradlew publishToMavenLocal
+        run: ./gradlew publishToMavenLocal
+        working-directory: otus-patterns-checker-core
 
       - name: Build and test
-        run: ./gradlew build
-        env:
-          MAVEN_USER_HOME: ~/.m2
-
-      - name: Check Kover coverage
-        run: ./gradlew koverVerify
-        env:
-          MAVEN_USER_HOME: ~/.m2
-
-      - name: Build and test
-        run: ./gradlew build
+        run: gradle build
 
       - name: Check Kover coverage
         run: ./gradlew koverVerify
