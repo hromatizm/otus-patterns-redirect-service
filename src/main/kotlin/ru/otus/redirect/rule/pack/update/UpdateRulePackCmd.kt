@@ -16,7 +16,7 @@ class UpdateRulePackCmd(
     override fun execute(args: Map<String, Any>): RulePackModel {
         val model = args["model"] as RulePackModel
         logger.info("Update rule pack. Started: $model")
-        val existingModel = rulePackRepo.findByUrlOrElseThrow(model.uri)
+        val existingModel = rulePackRepo.findByUriOrElseThrow(model.uri)
         val savedModel = rulePackRepo.save(
             existingModel.copy(pack = model.pack)
         )

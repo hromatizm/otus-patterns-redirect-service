@@ -2,7 +2,6 @@ package ru.otus.redirect.rule.condition
 
 import ru.otus.core.Condition
 
-
 class ConditionRegistry {
 
     companion object {

@@ -11,3 +11,5 @@ class EmptyRulePackException(uri: String) :
 
 class ConditionNotFoundException(code: String) :
     RuntimeException("Condition with code: $code not found")
+
+class NoConditionImplementationException() : RuntimeException("No Condition implementation found in JAR")

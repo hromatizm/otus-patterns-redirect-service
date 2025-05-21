@@ -1,4 +1,4 @@
-package ru.otus.redirect
+package ru.otus.redirect.rule.pack
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.assertj.core.api.Assertions.assertThat
@@ -18,9 +18,6 @@ import org.springframework.test.web.servlet.ResultActions
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
-import ru.otus.redirect.rule.pack.IRulePackJpaRepository
-import ru.otus.redirect.rule.pack.RulePackDto
-import ru.otus.redirect.rule.pack.RulePackEntity
 import java.net.URI
 
 private const val INITIAL_URI = "/patterns-course"

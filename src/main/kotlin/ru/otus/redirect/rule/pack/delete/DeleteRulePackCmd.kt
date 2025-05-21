@@ -15,7 +15,7 @@ class DeleteRulePackCmd(
     override fun execute(args: Map<String, Any>) {
         val uri = args["uri"] as String
         logger.info("Delete rule pack. Started: $uri")
-        val existingModel = rulePackRepo.findByUrlOrElseThrow(uri)
+        val existingModel = rulePackRepo.findByUriOrElseThrow(uri)
         rulePackRepo.deleteById(existingModel.id!!)
         logger.info("Delete rule pack. Finished. id: ${existingModel.id}")
     }

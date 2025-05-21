@@ -15,7 +15,6 @@ class GetRedirectLinkCmd(
    override fun execute(args: Map<String, Any>): String? {
         logger.info("Get Link. Started: $args")
         val ruleChain = getRuleChainCmd.execute(args)
-
         return ruleChain?.execute(args)
     }
 

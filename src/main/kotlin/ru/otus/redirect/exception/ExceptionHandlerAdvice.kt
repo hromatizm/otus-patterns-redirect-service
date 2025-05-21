@@ -19,4 +19,12 @@ class ExceptionHandlerAdvice {
         ResponseEntity
             .status(HttpStatus.NOT_FOUND)
             .body(exc.message)
+
+    @ExceptionHandler(NoConditionImplementationException::class)
+    fun handle(exc: NoConditionImplementationException) =
+        ResponseEntity
+            .status(HttpStatus.BAD_REQUEST)
+            .body(exc.message)
+
+
 }
