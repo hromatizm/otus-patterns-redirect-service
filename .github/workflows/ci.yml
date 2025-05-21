@@ -32,6 +32,9 @@ jobs:
         run: ./gradlew publishToMavenLocal
         working-directory: ./otus-patterns-checker-core
 
+      - name: List cloned repo
+        run: ls -la otus-patterns-checker-core
+
       - name: Build and test
         run: gradle build
 
