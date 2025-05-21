@@ -12,9 +12,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    env:
-      MAVEN_USER_HOME: ~/.m2  # Убедимся, что это единообразно
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -28,15 +25,9 @@ jobs:
       - name: Clone checker-core
         run: git clone https://github.com/hromatizm/otus-patterns-checker-core.git
 
-      - name: Publish redirect-core to Maven local
+      - name: Publish checker-core to Maven local
         run: ./gradlew publishToMavenLocal
         working-directory: ./otus-patterns-checker-core
 
-      - name: List cloned repo
-        run: ls -la otus-patterns-checker-core
-
-      - name: Build and test
-        run: gradle build
-
-      - name: Check Kover coverage
-        run: ./gradlew koverVerify
+      - name: Build main project
+        run: ./gradlew build koverVerify
