@@ -30,7 +30,7 @@ jobs:
 
       - name: Publish redirect-core to Maven local
         run: ./gradlew publishToMavenLocal
-        working-directory: ./redirect-core
+        working-directory: ./otus-patterns-checker-core
 
       - name: Build and test
         run: gradle build
