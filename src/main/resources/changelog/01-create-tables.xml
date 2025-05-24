@@ -34,7 +34,7 @@
             </not>
         </preConditions>
         <createIndex tableName="rules" indexName="ix_rules_uri">
-            <column>"uri"</column>
+            <column name="uri"/>
         </createIndex>
         <rollback>
             <dropIndex tableName="rules" indexName="ix_rules_uri"/>
