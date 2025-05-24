@@ -22,7 +22,22 @@
             </column>
         </createTable>
         <rollback>
-            <dropTable tableName="users"/>
+            <dropTable tableName="rules"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="rules-uri-index" author="Dmitry Mikhalishchin" context="all">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="rules" columnName="uri"/>
+            <not>
+                <indexExists indexName="ix_rules_uri"/>
+            </not>
+        </preConditions>
+        <createIndex tableName="rules" indexName="ix_rules_uri">
+            <column>"uri"</column>
+        </createIndex>
+        <rollback>
+            <dropIndex tableName="rules" indexName="ix_rules_uri"/>
         </rollback>
     </changeSet>
 
