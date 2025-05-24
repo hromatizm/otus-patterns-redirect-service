@@ -16,11 +16,13 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-cache")
 
     implementation("org.postgresql:postgresql:42.7.3")
     implementation("org.liquibase:liquibase-core:4.31.1")
     implementation("com.vladmihalcea:hibernate-types-60:2.21.1")
 
+    implementation("com.github.ben-manes.caffeine:caffeine:3.1.8")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 

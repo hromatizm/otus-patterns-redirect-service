@@ -1,5 +1,6 @@
 package ru.otus.redirect.rule.chain
 
+import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Service
 import ru.otus.core.ICommand
 import ru.otus.redirect.exception.ConditionNotFoundException
@@ -16,6 +17,7 @@ class GetRuleChainCmd(
 
     private val logger by lazyLogger()
 
+    @Cacheable(cacheNames = ["ruleChainByUri"], key = "#args['uri']")
     override fun execute(args: Map<String, Any>): ICommand<String?>? {
         val uri = args["uri"] as String
         logger.info("Get rule chain. Started: $args")

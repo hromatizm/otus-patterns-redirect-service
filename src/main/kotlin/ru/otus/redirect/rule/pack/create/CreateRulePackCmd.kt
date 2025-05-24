@@ -1,5 +1,6 @@
 package ru.otus.redirect.rule.pack.create
 
+import org.springframework.cache.annotation.CacheEvict
 import org.springframework.stereotype.Component
 import ru.otus.core.ICommand
 import ru.otus.redirect.exception.RulePackAlreadyExistsException

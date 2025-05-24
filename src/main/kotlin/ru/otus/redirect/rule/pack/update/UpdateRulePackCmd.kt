@@ -1,5 +1,6 @@
 package ru.otus.redirect.rule.pack.update
 
+import org.springframework.cache.annotation.CacheEvict
 import org.springframework.stereotype.Component
 import ru.otus.core.ICommand
 import ru.otus.redirect.rule.pack.IRulePackRepository
@@ -13,6 +14,7 @@ class UpdateRulePackCmd(
 
     private val logger by lazyLogger()
 
+    @CacheEvict(cacheNames = ["ruleChainByUri"], key = "#args['model'].uri")
     override fun execute(args: Map<String, Any>): RulePackModel {
         val model = args["model"] as RulePackModel
         logger.info("Update rule pack. Started: $model")

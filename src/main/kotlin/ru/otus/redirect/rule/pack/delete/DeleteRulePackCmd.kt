@@ -1,5 +1,6 @@
 package ru.otus.redirect.rule.pack.delete
 
+import org.springframework.cache.annotation.CacheEvict
 import org.springframework.stereotype.Component
 import ru.otus.core.ICommand
 import ru.otus.redirect.rule.pack.IRulePackRepository
@@ -12,6 +13,7 @@ class DeleteRulePackCmd(
 
     private val logger by lazyLogger()
 
+    @CacheEvict(cacheNames = ["ruleChainByUri"], key = "#args['uri']")
     override fun execute(args: Map<String, Any>) {
         val uri = args["uri"] as String
         logger.info("Delete rule pack. Started: $uri")
