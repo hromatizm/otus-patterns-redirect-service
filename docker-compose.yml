@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  gateway:
+    image: patterns/gateway:latest
+    build: ../gateway
+    container_name: patterns-gateway
+    depends_on:
+      - auth
+      - redirect
+    network_mode: "host"
+
+  auth:
+    image: patterns/auth:latest
+    build: ../auth
+    container_name: patterns-auth
+    network_mode: "host"
+
+  redirect:
+    image: patterns/redirect:latest
+    build: .
+    container_name: patterns-redirect
+    depends_on:
+      - auth
+    network_mode: "host"
+    volumes:
+      - ~/.m2/repository:/root/.m2/repository:ro
+

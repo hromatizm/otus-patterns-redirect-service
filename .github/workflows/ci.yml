@@ -22,15 +22,18 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Clean Gradle cache
+        run: rm -rf ~/.gradle/caches ~/.gradle/wrapper
+
       - name: Clone checker-core
         run: git clone https://github.com/hromatizm/otus-patterns-checker-core.git
 
       - name: Publish checker-core to Maven local
         run: ./gradlew publishToMavenLocal
-        working-directory: otus-patterns-checker-core
+        working-directory: ./otus-patterns-checker-core
 
-      - name: Build and test
-        run: gradle build
+      - name: List m2 otus
+        run: ls -la ~/.m2/repository/ru/otus
 
-      - name: Check Kover coverage
-        run: ./gradlew koverVerify
+      - name: Build main project
+        run: ./gradlew build koverVerify
